@@ -9,7 +9,7 @@
             {{ __('Busqueda') }}
         </h2>
     </x-slot>
-   
+    
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
@@ -18,7 +18,8 @@
                     <div class="container">
                         <main class="form-signin">
                             <p class="fs-2">Buscar Personal</p>
-   
+                            <a href="{{ route('excel-personal') }}" class="btn btn-primary">Exportar Excel</a>
+                            <br>
                             <br>
                             <table id="example" class="table table-striped">
                                 <thead>

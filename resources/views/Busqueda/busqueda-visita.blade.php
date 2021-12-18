@@ -9,7 +9,7 @@
             {{ __('Busqueda') }}
         </h2>
     </x-slot>
-   
+
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
@@ -17,44 +17,46 @@
                     @include('Busqueda.componentes.menu-busqueda')
                     <div class="container">
                         <main class="form-signin">
-                            <p class="fs-2">Buscar Personal</p>
-    
+                            <p class="fs-2">Buscar Visitantes</p>
+                            <a href="{{ route('excel-visita') }}" class="btn btn-primary">Exportar Excel</a>
                             <br>
-                
+                            <br>
+
                             <table id="example" class="table table-striped">
-                            <thead>
-                                <tr>
-                                <th>Nombre</th>
-                                <th>Telefono</th>
-                                <th>Ine</th>
-                                <th>Motivo</th>
-                                <th>Detalle</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach($BV as $itemR)
-                                <tr>
-                                <td>{{$itemR->nombre}}</td>
-                                <td>{{$itemR->telefono}}</td>
-                                <td>{{$itemR->ine}}</td>
-                                <td>{{$itemR->motivo}}</td>
-                                <td>
-                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal-updateV-{{$itemR->id}}">
-                                        Detalle
-                                    </button>
-                                </td>
-                                </tr>
-                                @include('Busqueda.componentes.modalV')
-                                @endforeach
-                            </tbody>
-                        </table>        
+                                <thead>
+                                    <tr>
+                                        <th>Nombre</th>
+                                        <th>Telefono</th>
+                                        <th>Ine</th>
+                                        <th>Motivo</th>
+                                        <th>Detalle</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($BV as $itemR)
+                                        <tr>
+                                            <td>{{ $itemR->nombre }}</td>
+                                            <td>{{ $itemR->telefono }}</td>
+                                            <td>{{ $itemR->ine }}</td>
+                                            <td>{{ $itemR->motivo }}</td>
+                                            <td>
+                                                <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                                    data-bs-target="#modal-updateV-{{ $itemR->id }}">
+                                                    Detalle
+                                                </button>
+                                            </td>
+                                        </tr>
+                                        @include('Busqueda.componentes.modalV')
+                                    @endforeach
+                                </tbody>
+                            </table>
                         </main>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</x-app-layout> 
+</x-app-layout>
 
 <!--Js-->
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
@@ -74,5 +76,5 @@
             "infoFiltered": "(Filtrado de _MAX_ registros totales)",
             'search': "Buscar:"
         }
-    });  
+    });
 </script>

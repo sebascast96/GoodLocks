@@ -8,6 +8,10 @@ use App\Http\Controllers\ConfiguracionController;
 use App\Http\Controllers\OperacionController;
 use App\Http\Controllers\UsuariosController;
 use Illuminate\Support\Facades\Route;
+use Maatwebsite\Excel\Excel;
+use App\Exports\PersonalExport;
+use App\Exports\ResidenteExport;
+use App\Exports\VisitaExport;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,10 +25,13 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
+    
     return view('welcome');
+   
 });
 
 Route::get('/dashboard', function () {
+    
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
 
@@ -73,8 +80,21 @@ Route::post('/Busqueda/Residentes/Coresidente', [BusquedaController::class, 'cre
 Route::delete('/Administracion/Buscar_residente/Coresidente/Eliminar/{id}', [BusquedaController::class, 'deleteCR'])->middleware(['auth'])->name('eliminar-coresidente');
 //  editar visitantes
 Route::put('/Administracion/Buscar_visitantes/Detallado/{id}', [BusquedaController::class, 'updateV'])->middleware(['auth'])->name('update-visitantes');
-
-
+//  exportar excel personal
+Route::get('/excelP', function (Excel $excel, PersonalExport $export) {
+    return $excel->download($export, 'personal.xlsx');
+    return redirect()->back;
+})->middleware(['auth'])->name('excel-personal');
+// exportal excel residente
+Route::get('/excelR', function (Excel $excel, ResidenteExport $export) {
+    return $excel->download($export, 'residente.xlsx');
+    return redirect()->back;
+})->middleware(['auth'])->name('excel-residente');
+// exportar excel visitantes
+Route::get('/excelV', function (Excel $excel, VisitaExport $export) {
+    return $excel->download($export, 'visita.xlsx');
+    return redirect()->back;
+})->middleware(['auth'])->name('excel-visita');
 //RUTAS OPERACION
 // vista principal
 Route::get('/Operacion', [OperacionController::class, 'index'])->middleware(['auth'])->name('index-visitante');
