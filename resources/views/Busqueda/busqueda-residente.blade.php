@@ -21,12 +21,14 @@
                              <a href="{{ route('excel-residente') }}" class="btn btn-primary">Exportar Excel</a>
                              <br>
                              <br>
+                             {{ \Carbon\Carbon::now()->submonth(2) }}
                              <table id="example" class="table table-striped">
                                  <thead>
                                      <tr>
                                          <th>Nombre</th>
                                          <th>Direccion</th>
                                          <th>Tipo</th>
+                                         <th>Status</th>
                                          <th>Detalle</th>
                                          <th>Asignar corresidentes</th>
                                          <th>Eliminar</th>
@@ -38,6 +40,20 @@
                                              <td>{{ $itemR->nombre }}</td>
                                              <td>{{ $itemR->direccion }}</td>
                                              <td>{{ $itemR->tipo }}</td>
+
+                                             @if (\Carbon\Carbon::parse($itemR->fecha_pago)->between(\Carbon\Carbon::now()->submonth(), \Carbon\Carbon::now()))
+                                                 <td><span
+                                                         class="bg-green-100 text-green-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-green-200 dark:text-green-900">Pagado</span>
+                                                 </td>
+                                             @elseif (\Carbon\Carbon::parse($itemR->fecha_pago)->between(\Carbon\Carbon::now()->submonth(), \Carbon\Carbon::now()->submonth(2)))
+                                                 <td><span
+                                                         class="bg-yellow-100 text-yellow-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-yellow-200 dark:text-yellow-900">Moroso
+                                                         1 mes</span></td>
+                                             @elseif (\Carbon\Carbon::parse($itemR->fecha_pago)->lessThan(\Carbon\Carbon::now()->submonth(2)))
+                                                 <td><span
+                                                         class="bg-red-100 text-red-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-red-200 dark:text-red-900">Moroso
+                                                         1+ meses</span></td>
+                                             @endif
                                              <td>
                                                  <button type="button" class="btn btn-primary" data-bs-toggle="modal"
                                                      data-bs-target="#modal-updateR-{{ $itemR->id }}">
@@ -51,7 +67,8 @@
                                                  </a>
                                              </td>
                                              <td>
-                                                 <form method="post" action="{{ route('eliminar-residente', $itemR) }}">
+                                                 <form method="post"
+                                                     action="{{ route('eliminar-residente', $itemR) }}">
                                                      @csrf
                                                      @method('delete')
                                                      <button type="submit" class="btn btn-danger"
@@ -78,6 +95,15 @@
  <script src="https://cdn.datatables.net/responsive/2.2.9/js/dataTables.responsive.min.js"></script>
  <script src="https://cdn.datatables.net/responsive/2.2.9/js/responsive.bootstrap5.min.js"></script>
  <script>
+     function payment(id) {
+         fetch('residentes/payment/' + id, {
+                 method: "PUT",
+             })
+             .then(response => response)
+             .then(json => console.log(json))
+             .catch(err => console.log(err));
+     }
+
      $('#example').DataTable({
          responsive: true,
          autoWidth: false,

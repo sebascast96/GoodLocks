@@ -9,7 +9,8 @@
                 <h5 class="modal-title" id="exampleModalLabel">Cerrar pluma</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body">
+            <div class="modal-body" style="display:flex;
+            justify-content: center;">
                 <a class="btn btn-lg btn-danger ml-1" onclick="fetch('api/close')
                 .then(response => response)
                 .then(json => console.log(json))

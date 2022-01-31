@@ -42,58 +42,60 @@
                                 <br>
                                 <p class="fs-4">Puertos arduino abiertos</p>
                                 <br>
-                                <form method="Post" action="{{ route('estatus-arduino') }}">
-                                    @csrf @method('put')
-                                    <div class="row">
-                                        <div class="col-3">
-                                            <select class="form-select" name="relay" id="relay"
-                                                aria-label="Default select example">
-                                                <option selected>Que relevador quieres usar</option>
-                                                <option value="1">1</option>
-                                                <option value="2">2</option>
-                                                <option value="3">3</option>
-                                                <option value="4">4</option>
-                                                <option value="5">5</option>
-                                                <option value="6">6</option>
-                                                <option value="7">7</option>
-                                                <option value="8">8</option>
-                                            </select>
-                                        </div>
-                                        <div class="col-3">
-                                            <input type="submit" class="btn btn-sm btn-primary" value="Guardar">
-                                        </div>
-                                    </div>
 
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>Puerto</th>
+                                            <th>Abierto</th>
+                                            <th>Cerrado</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>1</td>
+                                            <td><input type="checkbox" name="" id=""></td>
+                                            <td><input type="checkbox" name="" id=""></td>
+                                        </tr>
+                                        <tr>
+                                            <td>2</td>
+                                            <td><input type="checkbox" name="" id=""></td>
+                                            <td><input type="checkbox" name="" id=""></td>
+                                        </tr>
+                                        <tr>
+                                            <td>3</td>
+                                            <td><input type="checkbox" name="" id=""></td>
+                                            <td><input type="checkbox" name="" id=""></td>
+                                        </tr>
+                                        <tr>
+                                            <td>4</td>
+                                            <td><input type="checkbox" name="" id=""></td>
+                                            <td><input type="checkbox" name="" id=""></td>
+                                        </tr>
+                                        <tr>
+                                            <td>5</td>
+                                            <td><input type="checkbox" name="" id=""></td>
+                                            <td><input type="checkbox" name="" id=""></td>
+                                        </tr>
+                                        <tr>
+                                            <td>6</td>
+                                            <td><input type="checkbox" name="" id=""></td>
+                                            <td><input type="checkbox" name="" id=""></td>
+                                        </tr>
+                                        <tr>
+                                            <td>7</td>
+                                            <td><input type="checkbox" name="" id=""></td>
+                                            <td><input type="checkbox" name="" id=""></td>
+                                        </tr>
+                                        <tr>
+                                            <td>8</td>
+                                            <td><input type="checkbox" name="" id=""></td>
+                                            <td><input type="checkbox" name="" id=""></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <button class="btn btn-success">Guardar</button>
 
-                                </form>
-
-                                <br>
-                                <p class="fs-4">Puertos arduino cerrados</p>
-                                <br>
-                                <form method="Post" action="{{ route('estatus-arduino') }}">
-                                    @csrf @method('put')
-                                    <div class="row">
-                                        <div class="col-3">
-                                            <select class="form-select" name="relay" id="relay"
-                                                aria-label="Default select example">
-                                                <option selected>Que relevador quieres usar</option>
-                                                <option value="1">1</option>
-                                                <option value="2">2</option>
-                                                <option value="3">3</option>
-                                                <option value="4">4</option>
-                                                <option value="5">5</option>
-                                                <option value="6">6</option>
-                                                <option value="7">7</option>
-                                                <option value="8">8</option>
-                                            </select>
-                                        </div>
-                                        <div class="col-3">
-                                            <input type="submit" class="btn btn-sm btn-primary" value="Guardar">
-                                        </div>
-                                    </div>
-
-
-                                </form>
                             </form>
                         </main>
                     </div>

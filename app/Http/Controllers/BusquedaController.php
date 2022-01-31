@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Coresidente;
-use App\Models\Personal;
-use App\Models\Residentes;
-use App\Models\ServicioP;
+use Carbon\Carbon;
 use App\Models\TipoR;
 use App\Models\Visita;
+use App\Models\Personal;
+use App\Models\ServicioP;
+use App\Models\Residentes;
+use App\Models\Coresidente;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -39,7 +40,7 @@ class BusquedaController extends Controller
         $BR = Residentes::all()->where('fraccionamiento', $idf);
         return view('Busqueda.busqueda-residente',  compact('BR', 'tipo'));
     }
-    
+
     // PANTALLA VISITANTE
     public function indexV()
     {
@@ -53,13 +54,14 @@ class BusquedaController extends Controller
     {
         $diag = $id;
         $meca = Coresidente::all()->where('idr', $id);
-        return view('Busqueda.coresidentes', compact('diag','meca'));
+        return view('Busqueda.coresidentes', compact('diag', 'meca'));
     }
 
     // ------------------------ PERSONAL ------------------------
 
     // EDITAR PERSONAL
-    public function updateP(Request $request, $id){
+    public function updateP(Request $request, $id)
+    {
 
         $BP = Personal::find($id);
 
@@ -80,23 +82,24 @@ class BusquedaController extends Controller
         $BP->servicio = request('servicio');
 
         $BP->save();
-        
+
         return redirect()->back();
     }
-    
+
     // ELIMINAR PERSONAL
     public function deleteP($id)
     {
-         $BP = Personal::find($id); 
-         $BP->delete();
-         return redirect()->back();
+        $BP = Personal::find($id);
+        $BP->delete();
+        return redirect()->back();
     }
 
 
     // ------------------------ RESIDENTES ------------------------
 
     // EDITAR RESIDENTE
-    public function updateR($id, Request $request){
+    public function updateR($id, Request $request)
+    {
 
         $BR = Residentes::find($id);
 
@@ -121,14 +124,15 @@ class BusquedaController extends Controller
     // ELIMINAR RESIDENTE
     public function deleteR($id)
     {
-         $BR = Residentes::find($id); 
-         $BR->delete();
-         return redirect()->back();
+        $BR = Residentes::find($id);
+        $BR->delete();
+        return redirect()->back();
     }
 
     // ------------------------ CORESIDENTE ------------------------
 
-    public function createCR( Request $request){
+    public function createCR(Request $request)
+    {
 
         $idf = Auth::user()->fraccionamiento;
 
@@ -152,15 +156,16 @@ class BusquedaController extends Controller
 
     public function deleteCR($id)
     {
-         $BR = Coresidente::find($id); 
-         $BR->delete();
-         return redirect()->back();
+        $BR = Coresidente::find($id);
+        $BR->delete();
+        return redirect()->back();
     }
 
     // ------------------------ VISITANTES ------------------------
 
 
-    public function updateV(){
+    public function updateV()
+    {
 
         $CV = new Visita();
         $CV->nombre = request('nombre');
@@ -176,4 +181,10 @@ class BusquedaController extends Controller
     }
 
 
+    public function payment(Residentes $id)
+    {
+        $id->fecha_pago = Carbon::now()->toDateString();
+        $id->save();
+        return back();
+    }
 }

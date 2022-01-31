@@ -208,11 +208,6 @@
                                             .catch(err => console.log(err))">ABRIR PLUMA</button>
                                         </center>
 
-                                        <a class="btn btn-sm btn-warning ml-1" onclick="fetch('api/close')
-                                        .then(response => response)
-                                        .then(json => console.log(json))
-                                        .catch(err => console.log(err))">cerrar pluma
-                                        </a>
                                     </div>
                                     <div class="tab-pane" id="open">
                                         <h5 class="modal-title" id="exampleModalLabel">Visitas pendientes

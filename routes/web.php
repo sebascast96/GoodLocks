@@ -25,17 +25,16 @@ use App\Exports\VisitaExport;
 */
 
 Route::get('/', function () {
-    
+
     return view('welcome');
-   
 });
 
 Route::get('/dashboard', function () {
-    
+
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
 
 // RUTAS ADMINISTRACION
 // vista principal
@@ -103,7 +102,7 @@ Route::post('/Operacion/Nueva_Visita', [OperacionController::class, 'createV'])-
 // cambair estatus de visita
 Route::put('/Operacion/Actualizar_estatus/{id}', [OperacionController::class, 'estatus'])->middleware(['auth'])->name('estatusV');
 
-// RUTAS CONFIGURACION 
+// RUTAS CONFIGURACION
 Route::get('/Configuracion', [ConfiguracionController::class, 'index'])->middleware(['auth'])->name('index-configuracion');
 Route::put('/Configuracion/Ip/{id}', [ConfiguracionController::class, 'update'])->middleware(['auth'])->name('modificar-cam');
 
@@ -115,3 +114,6 @@ Route::get('/Usuarios', [UsuariosController::class, 'index'])->name('index-usuar
 Route::get('/Usuarios/Registrar', [RegisteredUserController::class, 'create'])->name('index-register');
 Route::post('/Usuarios/Registrar/usuario', [RegisteredUserController::class, 'store'])->name('register');
 Route::delete('/Usuarios/Registrar/usuario/Eliminar/{id}', [UsuariosController::class, 'deleteU'])->middleware(['auth'])->name('eliminar-usuario');
+
+
+Route::PUT('Busqueda/residentes/payment/{id}', [BusquedaController::class, 'payment'])->name('payment');
