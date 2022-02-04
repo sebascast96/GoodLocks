@@ -117,3 +117,7 @@ Route::delete('/Usuarios/Registrar/usuario/Eliminar/{id}', [UsuariosController::
 
 
 Route::PUT('Busqueda/residentes/payment/{id}', [BusquedaController::class, 'payment'])->name('payment');
+
+Route::put('/addpanel/{id}', [ConfiguracionController::class, 'addpanel'])->name('addpanel');
+Route::put('/deletepanel/{id}', [ConfiguracionController::class, 'deletepanel'])->name('deletepanel');
+Route::post('/updateArduino', [ConfiguracionController::class, 'updateArduino'])->name('updateArduino');

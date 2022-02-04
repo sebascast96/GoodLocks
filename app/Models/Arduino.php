@@ -14,7 +14,10 @@ class Arduino extends Model
         'abrir',
         'cerrar',
         'fraccionamiento',
-        ];
-    
+        'nonc',
+        'panel',
+        'puerto'
+    ];
+
     protected $table = 'arduino';
 }
