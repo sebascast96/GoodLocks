@@ -23,17 +23,18 @@ class OperacionController extends Controller
         $idf = Auth::user()->fraccionamiento;
         $idr = Residentes::all()->where('fraccionamiento', $idf);
         $cam = Camaras::all()->where('fraccionamiento', $idf);
+        $arduino = Arduino::all();
         $BV = Visita::where('estatus', 'abierta')
-        ->where('fraccionamiento', $idf)
-        ->get();
-        return view('operacion', compact('idr', 'BV', 'cam'));
+            ->where('fraccionamiento', $idf)
+            ->get();
+        return view('operacion', compact('idr', 'BV', 'cam', 'arduino'));
     }
 
     public function createV(HttpRequest $request)
     {
 
         $idf = Auth::user()->fraccionamiento;
-        
+
         $request->validate([
             'nombre' => ['required', 'string', 'max:255'],
             'telefono' => ['required', 'digits:10'],

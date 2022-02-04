@@ -200,6 +200,14 @@
 
                                         </form>
                                         <br>
+                                        <select name="arduino" class="form-select" id="">
+                                            @foreach ($arduino as $port)
+                                                @if ($port->nombre !== null)
+                                                    <option value="{{ $port->id }}">{{ $port->nombre }}</option>
+                                                @endif
+                                            @endforeach
+                                        </select>
+                                        <br>
                                         <center>
                                             <button class="btn btn-dark ml-1" data-bs-toggle="modal"
                                                 data-bs-target="#modalPluma" onclick="fetch('api/open')
@@ -222,6 +230,7 @@
                                                     <th>Ine</th>
                                                     <th>Placa</th>
                                                     <th>Motivo</th>
+                                                    <th>Salida</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -232,24 +241,32 @@
                                                         <td>{{ $itemR->ine }}</td>
                                                         <td>{{ $itemR->placa }}</td>
                                                         <td>{{ $itemR->motivo }}</td>
+                                                        <td>
+                                                            <a href="#salida"
+                                                                onclick="document.getElementById('snap4').disabled=false;"
+                                                                class="btn btn-warning">Registrar
+                                                                salida</a>
+                                                        </td>
                                                     </tr>
                                                 @endforeach
                                             </tbody>
                                         </table>
                                         <div style="margin-top: 20px">
 
-                                            <div class="card">
+                                            <div class="card" id="salida">
 
-                                                <video style="background: black url(loader.gif) center no-repeat;"
+                                                <video
+                                                    style="background: black url(loader.gif) center no-repeat; margin:auto;"
                                                     id="remoteVideo3" width="800" height="1000" autoplay=""
                                                     playsinline="" muted=""></video>
 
-                                                <div class="card-body">
-                                                    <center>
-                                                        <h5 class="card-title">Camara Placas</h5>
-                                                    </center>
-                                                    <center><button id="snap4" class="btn btn-dark">CAPTURAR</button>
-                                                    </center>
+                                                <div class="card-body" style="text-align:center">
+                                                    <h5 class="card-title ">Camara Placas</h5>
+                                                    <div class="d-flex justify-content-center">
+                                                        <a href="#pluma" id="snap4" class="btn btn-dark"
+                                                            onclick="document.getElementById('pluma').disabled=false;"
+                                                            disabled>CAPTURAR</a>
+                                                    </div>
                                                     <br>
                                                     <label for="brightnesslicense2"
                                                         class="form-label">Brillo</label>
@@ -264,6 +281,14 @@
                                             <div class="card">
                                                 <canvas id="canvas4" width="640" height="480"></canvas>
                                             </div>
+                                        </div>
+                                        <br>
+                                        <div class="d-flex justify-content-center">
+                                            <button class="btn btn-dark ml-1" data-bs-toggle="modal" id="pluma"
+                                                data-bs-target="#modalPluma" onclick="fetch('api/open')
+                                            .then(response => response)
+                                            .then(json => console.log(json))
+                                            .catch(err => console.log(err))" disabled>ABRIR PLUMA</button>
                                         </div>
                                     </div>
                                 </div>
