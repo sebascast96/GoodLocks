@@ -121,3 +121,5 @@ Route::PUT('Busqueda/residentes/payment/{id}', [BusquedaController::class, 'paym
 Route::put('/addpanel/{id}', [ConfiguracionController::class, 'addpanel'])->name('addpanel');
 Route::put('/deletepanel/{id}', [ConfiguracionController::class, 'deletepanel'])->name('deletepanel');
 Route::post('/updateArduino', [ConfiguracionController::class, 'updateArduino'])->name('updateArduino');
+
+Route::get('/info', [ConfiguracionController::class, 'info'])->name('compinfo');

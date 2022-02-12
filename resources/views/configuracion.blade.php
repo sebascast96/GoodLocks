@@ -12,6 +12,7 @@
                     <div class="container">
                         <main class="form-signin">
                             <p class="fs-2">Configuracion</p>
+                            <a class="btn btn-warning" href='{{ route('compinfo') }}'>Descargar Info</a>
                             <form>
                                 <p class="fs-4">Cambio de camaras</p>
                                 <br>
